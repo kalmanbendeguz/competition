@@ -1,4 +1,4 @@
-import { UnauthenticatedShell } from '@/components/UnauthenticatedShell'
+import { AuthenticatedShell } from '@/components/AuthenticatedShell'
 import { getServerSession } from "next-auth"
 import { redirect } from 'next/navigation'
 
@@ -10,15 +10,18 @@ export default async function Home({
     const session = await getServerSession();
     //const [opened, { toggle }] = useDisclosure();
     //let opened = true
-    if (session?.user?.name) {
-        redirect('/a')
+
+    if (!session?.user?.name) {
+        redirect('/')
     }
+
+    //const role = session?.user?.role
 
     return (
         <>
-            <UnauthenticatedShell>
+            <AuthenticatedShell>
                 {children}
-            </UnauthenticatedShell>
+            </AuthenticatedShell>
         </>
     )
 }
