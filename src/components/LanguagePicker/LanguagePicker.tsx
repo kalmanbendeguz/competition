@@ -4,6 +4,10 @@ import { IconChevronDown } from '@tabler/icons-react';
 import images from './images';
 import classes from './LanguagePicker.module.css';
 import Image from 'next/image'
+import { ActionIcon } from '@mantine/core';
+import { IconLanguage } from '@tabler/icons-react';
+
+
 
 const data = [
     { label: 'English', image: images.english },
@@ -18,7 +22,11 @@ export function LanguagePicker() {
     const [selected, setSelected] = useState(data[0]);
     const items = data.map((item) => (
         <Menu.Item
+            closeMenuOnClick={true}
+            color="dark"
+            disabled={false}
             leftSection={<Image src={item.image} width={30} height={30} alt='akarmi' />}
+            rightSection={undefined}
             onClick={() => setSelected(item)}
             key={item.label}
         >
@@ -31,18 +39,33 @@ export function LanguagePicker() {
             onOpen={() => setOpened(true)}
             onClose={() => setOpened(false)}
             radius="md"
-            width="target"
+            width="max-content"
             withinPortal
         >
             <Menu.Target>
-                <UnstyledButton className={classes.control} data-expanded={opened || undefined}>
+                <ActionIcon
+                    color="lime"
+                    disabled={false}
+                    loading={false}
+                    radius="sm"
+                    size={45}
+                    variant="light"
+                    aria-label="Settings"
+                >
+                    <IconLanguage 
+                    style={{ width: '100%', height: '100%' }} 
+                    stroke={1.5} 
+                    size={24} 
+                    />
+                </ActionIcon>
+                {/* <UnstyledButton className={classes.control} data-expanded={opened || undefined}> */}
 
-                        <Image src={selected.image}  width={26} height={26} alt="valami" />
-                        {/*<span className={classes.label}>aa{selected.label}</span>*/}
+                {/* <Image src={selected.image} width={26} height={26} alt="valami" /> */}
+                {/*<span className={classes.label}>aa{selected.label}</span>*/}
 
-                </UnstyledButton>
+                {/* </UnstyledButton> */}
             </Menu.Target>
-            <Menu.Dropdown>{items}</Menu.Dropdown>
+            <Menu.Dropdown /* className={classes.dropdown} */>{items}</Menu.Dropdown>
         </Menu>
     );
 }

@@ -14,7 +14,7 @@ export function UnauthenticatedShell({
 }: {
     children: React.ReactNode
 }) {
-    const [opened, { toggle }] = useDisclosure();
+    const [opened, { toggle }] = useDisclosure(false);
 
     return (
         <AppShell
@@ -24,13 +24,23 @@ export function UnauthenticatedShell({
             aside={{ width: 200, breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
             padding="md"
         >
-            <UnauthenticatedHeader />
-            {/*<AppShell.Main>*/}
-            {/*<HeroContentLeft />*/}
-            <LanguagePicker />
-            {/*</AppShell>{children}
-                UNAUTHENTICATED Aside is hidden on on md breakpoint and cannot be opened when it is collapsed
-    </AppShell.Main>*/}
+            <UnauthenticatedHeader opened={opened} toggle={toggle}/>
+            {/** KELL MAJD NAVBAR */}
+            <AppShell.Navbar>
+                sdfgsdf
+                {Array(15)
+                    .fill(0)
+                    .map((_, index) => (
+                        <Skeleton key={index} h={28} mt="sm" animate={false} />
+                    ))}
+            </AppShell.Navbar>
+            <AppShell.Main>
+
+                {/*<HeroContentLeft />*/}
+                {/* <LanguagePicker /> */}
+                {/*</AppShell>*/}{children}
+                {/* UNAUTHENTICATED Aside is hidden on on md breakpoint and cannot be opened when it is collapsed */}
+            </AppShell.Main>
             <AppShell.Footer p="md">Footer</AppShell.Footer>
 
         </AppShell>
